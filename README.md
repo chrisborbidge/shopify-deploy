@@ -18,5 +18,5 @@ python3 application.py
 #### Production
 ```
 pip install -r "requirements.txt"
-gunicorn application:app
+gunicorn application:app -w 1 --threads 2
 ```
