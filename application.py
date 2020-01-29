@@ -163,7 +163,7 @@ def deploy_shopify_theme(json_data):
             shopify_shop, shopify_key, shopify_secret, theme_title, theme_src, data
         )
         staging_theme_id = response_json["theme"]["id"]
-        time.sleep(30)
+        time.sleep(90)
         transfer_files_from_main_theme(
             shopify_shop, shopify_key, shopify_secret, staging_theme_id, data
         )
