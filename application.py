@@ -15,7 +15,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-app.config["TESTING"] = True
+app.config["TESTING"] = False
 
 
 def requests_retry_session(
@@ -186,7 +186,10 @@ def health():
 def deploy():
     json_data = request.get_json()
     if not json_data:
-        return {"status": "fail", "message": "No input data provided", "data": None}, 400
+        return (
+            {"status": "fail", "message": "No input data provided", "data": None},
+            400,
+        )
     response_json = deploy_shopify_theme(json_data)
     return {"status": "success", "message": "Deployed theme successfully", "data": None}
 
