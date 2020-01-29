@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, send_from_directory, url_for
+from flask_executor import Executor
 from github import Github
 
 import os
@@ -14,6 +15,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+executor = Executor(app)
 
 app.config["TESTING"] = False
 
@@ -192,8 +194,8 @@ def deploy():
             {"status": "fail", "message": "No input data provided", "data": None},
             400,
         )
-    response_json = deploy_shopify_theme(json_data)
-    return {"status": "success", "message": "Deployed theme successfully", "data": None}
+    executor.submit(deploy_shopify_theme, json_data)
+    return {"status": "success", "message": "Deploy task added to queue", "data": None}
 
 
 @app.route("/")
