@@ -128,7 +128,6 @@ def post_theme_to_shopify_and_stage(
     response_json = response.json()
     cwd = os.path.dirname(__file__)
     tmp = os.path.join(cwd, "tmp", "theme.zip")
-    os.remove(tmp)
     print("Done!")
     return response_json
 
@@ -167,6 +166,7 @@ def deploy_shopify_theme(json_data):
         transfer_files_from_main_theme(
             shopify_shop, shopify_key, shopify_secret, staging_theme_id, data
         )
+    os.remove(tmp)
     return response_json
 
 
